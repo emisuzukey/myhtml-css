@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BMS</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bict-animated.css">
+</head> 
+<body>
+	<header>
+		<div id="main-menu">
+			<nav id="menu-area">
+				<ul>
+					<li><button class="btn-home"><i class="fa fa-home"></i></button></li>
+					<li><a href="">BMS</a>
+						<ul class="submenu-1">
+							<li><a href="#">HVAC SYSTEM</a>
+								<ul class="submenu-2">
+									<li><a href="#">FLOORPLAN</a>
+										<ul class="submenu-3">
+											<li><a href="#">Level 1</a></li>
+											<li><a href="#">Level 2</a></li>
+											<li><a href="#">Level 3</a></li>
+										</ul>
+									</li>
+									<li><a href="#">HVAC SUMMARY</a></li>
+								</ul>
+							</li>
+							<li><a href="#">ENERGY CONSUMPTION</a>
+										<ul class="submenu-2">
+											<li><a href="#">HVAC UNIT</a></li>
+											<li><a href="#">HOT WATER SYSTEN</a></li>
+											<li><a href="#">SWIMMING POOL</a></li>
+										</ul>
+							</li>
+							<li><a href="#">UTILITIES</a>
+										<ul class="submenu-2">
+											<li><a href="#">CAR PARK</a></li>
+											<li><a href="#">LIFT</a></li>
+											<li><a href="#">SWIMMING POOL</a></li>
+										</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="">HISTORY</a></li>
+					<li><a href="">ALARM</a></li>
+					<li><a href="">USER LOG</a></li>
+				</ul>
+				<ul>
+					<button class="btn-logout"><i class="fa fa-close"></i> LOGOUT</button>
+				</ul>
+			</nav>
+			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+  			</a>
+		</div>
+	</header>
+	<script>
+	function myFunction() {
+  		var x = document.getElementById("myTopnav");
+  		if (x.className === "topnav") {
+    		x.className += " responsive";
+  		} else {
+    		x.className = "topnav";
+  		}
+	}
+	</script>   
+	<footer>
+		<div class="content">
+            <!--img src="https://i.postimg.cc/3wp24zS1/daikin.png" >
+			<img src="https://i.postimg.cc/mkWX1Qyz/bict.jpg" -->
+			<div class="foot">2023 © All rights reserved.</div>
+        </div>
+	</footer>
+</body>
+</html>

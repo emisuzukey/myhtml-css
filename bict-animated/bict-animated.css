@@ -1,0 +1,207 @@
+* {
+	margin: 0; 
+	padding: 0;
+	font-family: 'Montserrat', sans-serif;
+}
+header {
+	/*background: url("https://i.postimg.cc/sDGbTxrP/bangunan.png");*/
+	background: rgb(221, 224, 221);
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 91.8vh;
+}
+.btn-home {
+  background-color: rgb(0, 0, 0);
+  border: none;
+  color: white;
+  padding: 19px 30px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn-home:hover {
+  background-color: rgb(160, 160, 162);
+}
+header #main-menu {
+	background: #222;
+	float: left;
+	height: 60px;
+	line-height: 30px;
+	width: 100%;
+}
+
+header nav#menu-area ul li {
+	float: left;
+	position: relative;
+	font-size: 14px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 80px;
+	text-align: center;
+	text-transform: uppercase;
+}
+header nav#menu-area ul li a {
+	color: #fff;
+	text-decoration: none;
+	display: block;
+	line-height: 60px;
+}
+header nav#menu-area ul li:hover>a {
+	background: #555555;
+}
+header nav#menu-area ul li ul.submenu-1 {
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	left: 0px;
+	top: 60px;
+	background: #222;
+	width: 180px;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s ease-out, visibility 0.1s 0.1s linear;
+}
+header nav#menu-area ul li ul.submenu-1 li {
+	border: none;
+	border-bottom: 1px solid #ccc;
+	clear: both;
+	margin-top: -15px;
+	padding: 0;
+	width: 180px;
+	transition: opacity 0.15s 0.15s ease-out, margin 0.3s 0.1s ease-out;
+}
+header nav#menu-area ul li:hover ul.submenu-1 {
+	opacity: 1;
+	visibility: visible;
+}
+header nav#menu-area ul li:hover ul.submenu-1 li {
+	margin-top: 0;
+	opacity: 1;
+}
+header nav#menu-area ul li ul.submenu-1 li ul.submenu-2 {
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	left: 61px;
+	top: 0px;
+	background: #222;
+	width: 180px;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s 0.01s ease-in-out, left 0.2s 0.1s ease-out, visibility 0.1s 0.1s linear;
+}
+ul.submenu-1 li ul.submenu-2 li {
+	border: none;
+	border-bottom: 1px solid #ccc;
+	clear: both;
+	margin: 0;
+	padding: 0;
+	width: 180px;
+	opacity: 1;
+}
+header nav#menu-area ul li ul.submenu-1 li:hover ul.submenu-2 {
+	opacity: 1;
+	left: 180px;
+	visibility: visible;
+}
+header nav#menu-area ul li ul.submenu-1 li ul.submenu-3 {
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	left: 61px;
+	top: 0px;
+	background: #222;
+	width: 180px;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s 0.01s ease-in-out, left 0.2s 0.1s ease-out, visibility 0.1s 0.1s linear;
+}
+ul.submenu-2 li ul.submenu-3 li {
+	border: none;
+	border-bottom: 1px solid #ccc;
+	clear: both;
+	margin: 0;
+	padding: 0;
+	width: 180px;
+	opacity: 1;
+}
+header nav#menu-area ul li ul.submenu-2 li:hover ul.submenu-3 {
+	opacity: 1;
+	left: 180px;
+	visibility: visible;
+}
+
+.btn-logout {
+  float: right;
+  top: 0px;
+  right: 0px;
+  background-color: rgb(250, 2, 2);
+  border: none;
+  color: white;
+  padding: 20px 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn-logout:hover {
+  background-color: rgb(160, 160, 162);
+}
+
+/*footer*/
+footer {
+  background-color: #777;
+  padding: 10px;
+}
+.content {
+    display: block;
+    padding: 6px;
+    /*margin: 0px auto;*/
+    text-align: right;
+    font: 25px Georgia, "Times New Roman", Times, serif;
+    font-size: 14px;
+}
+.foot {
+ 	display:inline;
+    line-height: 30px;
+}
+
+/*.content img {
+    height:40px;
+    width: 110px;
+    float:right;
+}*/
+
+
+
+@media screen and (max-width: 600px) {
+  .main-menu a:not(:first-child) {display: none;}
+  .main-menu a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main-menu.responsive {position: relative;}
+  .main-menu.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .main-menu.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
