@@ -1,0 +1,170 @@
+<!DOCTYPE = html>
+<html>
+	<head>
+        <meta charset="utf-8">
+        <title>Marriot Hotel</title>
+        <!-- Bootstrap + css design -->
+        <link href="Content/bootstrap.min.css" rel="stylesheet"/>
+        <script src="Scripts/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="css/styles.css">
+        <!-- Google Font style -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Montserrat:wght@300;400;900&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+        <!-- fontawesome  -->
+        <script src="https://kit.fontawesome.com/c1eaf2e0cd.js" crossorigin="anonymous"></script>
+    </head>
+	<body id="homepage-body"> 
+        <div class="row">
+            <!-- calendar + memo -->
+            <div class="col-lg-3">
+                <!-- calendar section -->
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <span class="month-picker" id="month-picker">April</span>
+                        <div class="year-picker">
+                            <span class="year-change" id="prev-year">
+                                <pre><</pre>
+                            </span>
+                            <span id="year">2022</span>
+                            <span class="year-change" id="next-year">
+                                <pre>></pre>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="calendar-body">
+                        <div class="calendar-week-day">
+                            <div>Sun</div>
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                        </div>
+                        <div class="calendar-days"></div>
+                    </div>
+                    <div class="month-list"></div>
+                </div>
+                <script src="./Scripts/app.js"></script>
+                <!-- memo section  -->
+                <div class="memo">
+                    <!-- name section in memo -->
+                    <label for="title">
+                        <script>
+                            if(localStorage.getItem("storedName") != null){
+                                document.write("<p class=\"memo-username-saved\"><b>Name: </b><span id=\"result-name\"></span></p>")
+                            } else {
+                                document.write("<input class=\"memo-username\" id=\"title\" placeholder=\"Name\">")
+                            }
+                        </script>
+                        <script id="result-name">
+                            document.getElementById("result-name").innerHTML=localStorage.getItem("storedName");
+                        </script>
+                    </label>
+                    <br> 
+                    <!-- date section in memo -->
+                    <input type="hidden" id="date" size="40"> 
+                    <!-- content section in memo -->
+                    <label for="content">
+                        <script>
+                            if(localStorage.getItem("storedItem") != null){
+                                document.write("<p class=\"memo-content-saved\" id=\"result\" ></p>");
+                            } else {
+                                document.write("<textarea class=\"memo-content\" id=\"content\"  placeholder=\"Drop some notes here ...\"></textarea>");
+                            }
+                        </script>
+                        <script id="result">
+                            document.getElementById("result").innerHTML=localStorage.getItem("storedItem");
+                        </script>
+                    </label>
+                    <br>
+                    <!-- button for saving draft, clearing draft and save to local file  -->
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <button class="memo-button-savedraft memo-button" onclick="save()"> 
+                                <i class="fa-sharp fa-solid fa-floppy-disk"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="memo-button-deletedraft memo-button" onclick="deleteLog()">
+                                <i class="fa-solid fa-rotate-right"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="memo-button-savefile memo-button" onclick="saveFormAsTextFile()">
+                                <i class="fa-solid fa-circle-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CAN CHANGE : Project Image  -->
+            <div class="col-lg-7">
+                <img class="project-photo" src="./Images/MARRIOT1.jpg" alt="Project-photo">
+            </div>
+        </div>
+	</body>
+</html>
+
+<!-- <script>    
+    /* save memo as draft */
+    function save(){
+        var Name=document.getElementById("title").value;
+        var Item=document.getElementById("content").value;
+        localStorage.setItem("storedName", Name);
+        localStorage.setItem("storedItem", Item);
+        window.alert("Draft Save ✅");
+    }
+    
+    /* delete saved memo */
+    function deleteLog(){
+        localStorage.clear();
+        window.alert("Draft Deleted ✅");
+        location.reload();
+    }
+    
+    /* save memo to file functions */
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd
+        } 
+
+    if(mm<10) {
+        mm='0'+mm
+        } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+
+    function saveFormAsTextFile()
+        // Based on https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
+        {
+        var textToSave =
+            '---\n'+
+            'Name: ' + document.getElementById('title').value + '\n' + // =title
+            'Date: ' + today + '\n' + // =date - automatically puts today's date =todo: fix bug allowing going over 60 seconds, i.e. 61 seconds
+            document.getElementById('content').value // =content;
+
+        var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+        var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+        var fileNameToSaveAs = "";
+
+        var downloadLink = document.createElement("a");
+        downloadLink.download = fileNameToSaveAs;
+        downloadLink.innerHTML = "Download File";
+        downloadLink.href = textToSaveAsURL;
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+
+        downloadLink.click();
+    }
+
+    function destroyClickedElement(event){
+        document.body.removeChild(event.target);
+    }
+</script> -->

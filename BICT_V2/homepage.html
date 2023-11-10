@@ -1,0 +1,210 @@
+<!DOCTYPE = html>
+<html>
+	<head>
+        <meta charset="utf-8">
+        <title>Marriot Hotel</title>
+        <!-- Bootstrap + css design -->
+        <link href="Content/bootstrap.min.css" rel="stylesheet"/>
+        <script src="Scripts/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <!-- Google Font style -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Montserrat:wght@300;400;900&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+        <!-- fontawesome  -->
+        <script src="https://kit.fontawesome.com/c1eaf2e0cd.js" crossorigin="anonymous"></script>
+    </head>
+	<body id="homepage-body"> 
+        <div class="row">
+            <!-- clock + memo -->
+            <div class="col-lg-3">
+                <!-- clock -->
+                <div class="clockdate-wrapper">
+                    <div id="clock"></div>
+                    <div id="date"></div>
+                </div>
+                <script>
+                    function startTime() {
+                    var today = new Date();
+                    var hr = today.getHours();
+                    var min = today.getMinutes();
+                    var sec = today.getSeconds();
+                    
+                    //Add a zero in front of numbers<10
+                    hr = checkTime(hr);
+                    min = checkTime(min);
+                    sec = checkTime(sec);
+                    document.getElementById("clock").innerHTML = hr + ":" + min + ":" + sec ;
+                    
+                    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                    var curWeekDay = days[today.getDay()];
+                    var curDay = today.getDate();
+                    var curMonth = months[today.getMonth()];
+                    var curYear = today.getFullYear();
+                    var date = curWeekDay+", "+curDay+" "+curMonth+" "+curYear;
+                    document.getElementById("date").innerHTML = date;
+                    
+                    var time = setTimeout(function(){ startTime() }, 500);}
+                    function checkTime(i) {
+                        if (i < 10) {
+                            i = "0" + i;
+                        }
+                        return i;
+                    }
+                    startTime();
+                </script>
+                <!-- memo section  -->
+                <div class="memo">
+                    <!-- name section in memo -->
+                    <label for="title">
+                        <script>
+                            if(localStorage.getItem("storedName") != null){
+                                document.write("<textarea class=\"memo-username-saved\" id=\"result-name\" placeholder=\"Name\" ></textarea>");
+                            } else {
+                                document.write("<input class=\"memo-username\" id=\"title\" placeholder=\"Name\">")
+                            }
+                        </script>
+                        <script id="result-name">
+                            document.getElementById("result-name").innerHTML=localStorage.getItem("storedName");
+                        </script>
+                    </label>
+                    <br> 
+                    <!-- date section in memo -->
+                    <input type="hidden" id="date" size="40"> 
+                    <!-- content section in memo -->
+                    <label for="content">
+                        <script>
+                            if(localStorage.getItem("storedItem") != null){
+                                document.write("<textarea class=\"memo-content-saved\" id=\"result\" placeholder=\"Drop some notes here ...\" ></textarea>");
+                            } else {
+                                document.write("<textarea class=\"memo-content\" id=\"content\"  placeholder=\"Drop some notes here ...\"></textarea>");
+                            }
+                        </script>
+                        <script id="result">
+                            document.getElementById("result").innerHTML=localStorage.getItem("storedItem");
+                        </script>
+                    </label>
+                    <br>
+                    <!-- button for saving draft, clearing draft and save to local file  -->
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <button class="memo-button-savedraft memo-button" onclick="save()"> 
+                                <i class="fa-sharp fa-solid fa-floppy-disk"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="memo-button-deletedraft memo-button" onclick="deleteLog()">
+                                <i class="fa-solid fa-rotate-right"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="memo-button-savefile memo-button" onclick="saveFormAsTextFile()">
+                                <i class="fa-solid fa-circle-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CAN CHANGE : Project Image  -->
+            <div class="col-lg-7 project-photo-container">
+                <img class="project-photo" src="./Images/project-photo.gif" alt="Project-photo">
+            </div>
+        </div>
+	</body>
+</html>
+
+<script>    
+    /* save memo as draft */
+    /* save memo as draft */
+ function save(){
+    var Name;
+    var Item;
+    if(document.getElementById("title")){
+        Name = document.getElementById("title").value;
+    } else {
+        Name = document.getElementById("result-name").value;
+    }
+    if(document.getElementById("content")){
+        Item = document.getElementById("content").value;
+    } else {
+        Item = document.getElementById("result").value;
+    }
+    localStorage.setItem("storedName", Name);
+    localStorage.setItem("storedItem", Item);
+    window.alert("Draft Save ✅");
+}
+    
+    /* delete saved memo */
+    function deleteLog(){
+        localStorage.clear();
+        window.alert("Draft Deleted ✅");
+        location.reload();
+    }
+    
+    /* save memo to file functions */
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    var hour = today.getHours();
+    var min = today.getMinutes();
+    var seconds = today.getSeconds();
+
+    if(dd<10) {
+        dd='0'+dd
+        } 
+
+    if(mm<10) {
+        mm='0'+mm
+        } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+
+    time = hour+':'+min+':'+seconds;
+
+    function saveFormAsTextFile()
+        // Based on https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
+        {
+
+        var username;
+        var usercontent;
+    
+        if(document.getElementById("title") != null){
+            username = document.getElementById("title").value;
+        } else {
+            username = localStorage.getItem("storedName");
+        }
+        if(document.getElementById("content") != null){
+            usercontent = document.getElementById("content").value;
+        }else{
+            usercontent = localStorage.getItem("storedItem");
+        }
+
+        var textToSave =
+            '---\n'+
+            'Name: ' + username + '\n' + // =title
+            'Date: ' + today + '\n' +// =date - automatically puts today's date =todo: fix bug allowing going over 60 seconds, i.e. 61 seconds
+            'Time: ' + time + '\n' + 
+            '---\n' + 
+            usercontent // =content;
+
+        var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+        var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+        var fileNameToSaveAs = "";
+
+        var downloadLink = document.createElement("a");
+        downloadLink.download = fileNameToSaveAs;
+        downloadLink.innerHTML = "Download File";
+        downloadLink.href = textToSaveAsURL;
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+
+        downloadLink.click();
+    }
+
+    function destroyClickedElement(event){
+        document.body.removeChild(event.target);
+    }
+</script>
